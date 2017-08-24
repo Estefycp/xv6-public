@@ -130,6 +130,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_shutdown] sys_shutdown,
 [SYS_reboot] sys_reboot,
+[SYS_set_priority] sys_set_priority,
 };
 
 void
