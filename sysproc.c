@@ -95,7 +95,7 @@ int sys_set_priority(void)
   int priority;
   if(argint(0, &priority) < 0)
     return -1;
-  myproc->priority = priority;
+  myproc()->priority = priority;
   return 0;
 }
 
