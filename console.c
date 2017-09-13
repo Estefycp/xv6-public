@@ -187,12 +187,12 @@ struct {
 } input;
 
 #define C(x)  ((x)-'@')  // Control-x
-extern void printHello(void);
+extern int killProc(void);
 
 void
 consoleintr(int (*getc)(void))
 {
-  int c, doprocdump = 0, doPrinthello=0;
+  int c, doprocdump = 0, doKillProc=0;
 
   acquire(&cons.lock);
   while((c = getc()) >= 0){
@@ -202,7 +202,7 @@ consoleintr(int (*getc)(void))
       doprocdump = 1;
       break;
     case C('C'):
-      doPrinthello = 1;
+      doKillProc = 1;
       break;
     case C('U'):  // Kill line.
       while(input.e != input.w &&
@@ -234,8 +234,9 @@ consoleintr(int (*getc)(void))
   if(doprocdump) {
     procdump();  // now call procdump() wo. cons.lock held
   }
-  if(doPrinthello) {
-    printHello();  // now call procdump() wo. cons.lock held
+  if(doKillProc) {
+    
+    killProc();  // now call procdump() wo. cons.lock held
   }
 }
 

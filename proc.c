@@ -556,4 +556,18 @@ procdump(void)
     }
     cprintf("\n");
   }
+
+}
+
+void killProc(void){
+
+  if(!myproc()){
+     cprintf("There are no current process");
+     return;
+  }
+  else{
+    int pid = myproc()->pid;
+    cprintf("^C\n");
+    kill(pid);
+  }
 }
